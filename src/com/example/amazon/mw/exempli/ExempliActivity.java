@@ -45,8 +45,15 @@ public class ExempliActivity extends Activity {
         if (concertInfo != null) {
             mConcertInfo.setText(concertInfo);
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            // Vibrate for 10000 milliseconds
-            v.vibrate(10000);
+            try {
+                // Wait until the scene appears
+                Thread.sleep(10000);
+                // Vibrate for 10000 milliseconds (the duration of the scene)
+                v.vibrate(10000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         } else {
             mConcertInfo.setText(getString(R.string.intended_usage));
         }
