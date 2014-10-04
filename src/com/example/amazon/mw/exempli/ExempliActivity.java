@@ -8,8 +8,10 @@
 package com.example.amazon.mw.exempli;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.widget.TextView;
 
 /**
@@ -42,6 +44,9 @@ public class ExempliActivity extends Activity {
          */
         if (concertInfo != null) {
             mConcertInfo.setText(concertInfo);
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 10000 milliseconds
+            v.vibrate(10000);
         } else {
             mConcertInfo.setText(getString(R.string.intended_usage));
         }
