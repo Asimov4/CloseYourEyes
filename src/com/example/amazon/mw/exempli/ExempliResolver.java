@@ -12,6 +12,7 @@ import com.amazon.mw.entity.Facet;
 import com.amazon.mw.entity.FacetType;
 import com.amazon.mw.entity.MusicFacet;
 import com.amazon.mw.entity.Contributor;
+import com.amazon.mw.entity.VideoFacet;
 import com.amazon.mw.plugin.Resolver;
 import com.example.amazon.mw.exempli.ExempliClient.ExempliResponse;
 
@@ -45,12 +46,12 @@ public class ExempliResolver extends Resolver {
 
         // Get the MusicFacet from the digital entity. It should never be null,
         // as it was declared as required in ExempliPlugin.getDigitalEntityFilter.
-        MusicFacet musicFacet = getDigitalEntity().getFacet(FacetType.MUSIC);
-        String performers = getPerformerNames(musicFacet.getPerformers());
+        VideoFacet videoFacet = getDigitalEntity().getFacet(FacetType.VIDEO);
+        String advisoryRating = videoFacet.getAdvisoryRating();
 
         // Call the mocked external service.
         ExempliClient exClient = new ExempliClient();
-        final ExempliResponse exResponse = exClient.getUpcomingConcertData(performers);
+        final ExempliResponse exResponse = exClient.getUpcomingConcertData(advisoryRating);
 
         // If the service didn't find any related concerts, then don't extend the identification.
         if (!exResponse.foundConcert()) {
@@ -60,9 +61,7 @@ public class ExempliResolver extends Resolver {
         // Found a related concert. Create an ExempliFacet object and get properties from it.
         // The ExempliDigitalEntityUI object will use this facet to display a label.
         Facet exempliFacet = new Facet();
-        exempliFacet.saveAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_PERFORMER, performers);
-        exempliFacet.saveAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_CONCERT_DATE, exResponse.getConcertDate());
-        exempliFacet.saveAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_CONCERT_LOCATION, exResponse.getConcertLocation());
+        exempliFacet.saveAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_ADVISORY_RATING, advisoryRating);
 
         return exempliFacet;
     }

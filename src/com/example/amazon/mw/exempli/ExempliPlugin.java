@@ -19,11 +19,11 @@ import android.util.Log;
 
 /**
  * This file defines a plugin service for the fictional Exempli app. This is a resolving plugin;
- * it interprets data against digital entities with music facets, calls an external service to find
+ * it interprets data against digital entities with video facets, calls an external service to find
  * information about related concerts close to the user's area, and adds that concert data to the
  * digital entity.
  *
- * This sample code assumes that Firefly has identified a music digital entity. It does not
+ * This sample code assumes that Firefly has identified a video digital entity. It does not
  * matter exactly how the entity was identified. It could have scanned a bar code on a CD/album,
  * the cover of a CD/album, or audio from a song.
  */
@@ -31,16 +31,12 @@ public class ExempliPlugin extends ResolvingPlugin {
     // TAG used for logging.
     private static String TAG = ExempliPlugin.class.getSimpleName();
     // Performer attribute for custom facet.
-    public static final String EXEMPLI_FACET_ATTRIBUTE_PERFORMER = "performer";
-    // Concert date attribute for custom facet.
-    public static final String EXEMPLI_FACET_ATTRIBUTE_CONCERT_DATE = "concert_date";
-    // Concert location attribute for custom facet.
-    public static final String EXEMPLI_FACET_ATTRIBUTE_CONCERT_LOCATION = "concert_location";
+    public static final String EXEMPLI_FACET_ATTRIBUTE_ADVISORY_RATING = "advisory_rating";
 
-    // Configure the ExempliPlugin to resolve any music identification.
+    // Configure the ExempliPlugin to resolve any video identification.
     @Override
     public DigitalEntityFilter getDigitalEntityFilter() {
-        return new DigitalEntityFilter().addRequiredFacets(FacetType.MUSIC);
+        return new DigitalEntityFilter().addRequiredFacets(FacetType.VIDEO);
     }
 
     // Create a resolver for this plugin.

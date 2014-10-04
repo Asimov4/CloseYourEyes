@@ -62,9 +62,7 @@ public class ExempliDigitalEntityUI extends DigitalEntityUI {
     private String getConcertInfo() {
         Facet facet = getDigitalEntity().getFacet(FacetType.MY_FACET);
         String concertInfo = getContext().getString(R.string.concert_label,
-                             facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_PERFORMER),
-                             facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_CONCERT_LOCATION),
-                             facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_CONCERT_DATE));
+                             facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_ADVISORY_RATING));
 
         return concertInfo;
     }
