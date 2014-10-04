@@ -11,10 +11,12 @@
         android:id="@+id/title_header"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name" />
+        android:text="@string/app_name"
+        android:textSize="40sp" />
     <TextView
         android:id="@+id/concert_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/concert_info" />
+        android:text="@string/concert_info"
+        android:textSize="40sp"/>
 </LinearLayout>
