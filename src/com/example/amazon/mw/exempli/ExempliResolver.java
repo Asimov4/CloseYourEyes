@@ -51,7 +51,7 @@ public class ExempliResolver extends Resolver {
 
         // Call the mocked external service.
         ExempliClient exClient = new ExempliClient();
-        final ExempliResponse exResponse = exClient.getUpcomingConcertData(advisoryRating);
+        final ExempliResponse exResponse = exClient.getUpcomingConcertData(videoFacet.getAIVAsin());
 
         // If the service didn't find any related concerts, then don't extend the identification.
         if (!exResponse.foundConcert()) {
@@ -62,6 +62,7 @@ public class ExempliResolver extends Resolver {
         // The ExempliDigitalEntityUI object will use this facet to display a label.
         Facet exempliFacet = new Facet();
         exempliFacet.saveAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_ADVISORY_RATING, advisoryRating);
+        exempliFacet.saveAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_VIDEO_TITLE, videoFacet.getTitle());
 
         return exempliFacet;
     }

@@ -32,6 +32,7 @@ public class ExempliPlugin extends ResolvingPlugin {
     private static String TAG = ExempliPlugin.class.getSimpleName();
     // Performer attribute for custom facet.
     public static final String EXEMPLI_FACET_ATTRIBUTE_ADVISORY_RATING = "advisory_rating";
+    public static final String EXEMPLI_FACET_ATTRIBUTE_VIDEO_TITLE = "video_title";
 
     // Configure the ExempliPlugin to resolve any video identification.
     @Override

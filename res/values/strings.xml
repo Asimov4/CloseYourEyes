@@ -4,7 +4,7 @@
 <resources>
     <string name="app_name">Close Your Eyes</string>
     <string name="concert_info">Upcoming graphic scenes</string>
-    <string name="concert_label">See %1$s</string>
+    <string name="concert_label">You are watching %1$s and its parental guidance is %2$s. Your phone will vibrate to let you know when to close your eyes for graphic scenes.</string>
     <string name="description">Close Your Eyes: alerting you for graphic scenes detected by Firefly</string>
     <string name="intended_usage">This activity is meant to be launched from the Firefly application when associated
         with identified movies.</string>
