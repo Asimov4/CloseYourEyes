@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.widget.TextView;
 
@@ -44,16 +45,13 @@ public class ExempliActivity extends Activity {
          */
         if (concertInfo != null) {
             mConcertInfo.setText(concertInfo);
-            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            try {
-                // Wait until the scene appears
-                Thread.sleep(10000);
-                // Vibrate for 10000 milliseconds (the duration of the scene)
-                v.vibrate(10000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                    v.vibrate(10000);
+                }
+            }, 10000);
         } else {
             mConcertInfo.setText(getString(R.string.intended_usage));
         }
