@@ -1,0 +1,22 @@
+//
+// build.gradle
+//
+// Copyright (c) 2014 Amazon.com, Inc. or its affiliates. All rights reserved.
+//
+// Use is subject to license terms.
+//
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion "Amazon.com:Amazon Fire Phone SDK Addon:17"
+
+    buildToolsVersion "19.1.0"
+
+    sourceSets {
+        main {
+            manifest.srcFile "AndroidManifest.xml"
+            java.srcDirs "src"
+            res.srcDirs "res"
+        }
+    }
+}
