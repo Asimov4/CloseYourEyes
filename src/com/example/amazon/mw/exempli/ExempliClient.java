@@ -69,8 +69,11 @@ public class ExempliClient {
     // Demo concert locations for getConcertLocation to return.
     private static Map<String,String> asinToImdbId = new HashMap<String, String>();
     static {
-        asinToImdbId.put("B005T5MYXC","tt0110912");
+        asinToImdbId.put("B005T5MYXC","tt0110912"); // Pulp fiction
         asinToImdbId.put("B0030MBX56","tt0116282"); // fargo
+        asinToImdbId.put("B006RXQDH8","tt0266697"); // kill bill
+        asinToImdbId.put("B006SAR83I","tt0378194"); // kill bill volume 2
+
     }
 
     // Method to return mocked concert date and concert location (static info for demo purposes).
