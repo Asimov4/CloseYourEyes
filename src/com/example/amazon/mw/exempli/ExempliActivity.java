@@ -13,7 +13,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This Activity demonstrates the Exempli application's functionality.
@@ -24,8 +29,9 @@ import android.widget.TextView;
 public class ExempliActivity extends Activity {
     // Concert TextView
     private TextView mConcertInfo;
+    private ListView mGuidesList;
 
-     // Get the intent that started this Activity and display the associated concert info.
+    // Get the intent that started this Activity and display the associated concert info.
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
@@ -35,8 +41,13 @@ public class ExempliActivity extends Activity {
         Intent concertIntent = getIntent();
         final String concertInfo = concertIntent.getStringExtra(Intent.EXTRA_TEXT);
 
+        List<String> guides = (ArrayList<String>) concertIntent.getSerializableExtra("guides");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,guides);
+
         // Update the concert TextView.
         mConcertInfo = (TextView) this.findViewById(R.id.concert_textview);
+        mGuidesList = (ListView) this.findViewById(R.id.listView);
 
         /* This Activity is meant to be launched from the Firefly application and associated
          * with identified music.
@@ -45,6 +56,7 @@ public class ExempliActivity extends Activity {
          */
         if (concertInfo != null) {
             mConcertInfo.setText(concertInfo);
+            mGuidesList.setAdapter(adapter);
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {

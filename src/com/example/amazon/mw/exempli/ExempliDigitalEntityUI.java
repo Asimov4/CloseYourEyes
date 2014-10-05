@@ -7,6 +7,8 @@
  */
 package com.example.amazon.mw.exempli;
 
+import android.content.Intent;
+
 import com.amazon.mw.entity.DigitalEntity;
 import com.amazon.mw.entity.Facet;
 import com.amazon.mw.entity.FacetType;
@@ -14,7 +16,7 @@ import com.amazon.mw.plugin.DigitalEntityUI;
 import com.amazon.mw.plugin.Label;
 import com.amazon.mw.plugin.SimpleLabel;
 
-import android.content.Intent;
+import java.util.ArrayList;
 
 // Define the DigitalEntityUI class for the Exempli plugin.
 public class ExempliDigitalEntityUI extends DigitalEntityUI {
@@ -31,8 +33,14 @@ public class ExempliDigitalEntityUI extends DigitalEntityUI {
     @Override
     public Label getLabel() {
         SimpleLabel label = new SimpleLabel();
+        Facet facet = getVideoInfo();
+
+        String concertInfo = getContext().getString(R.string.concert_label,
+                facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_VIDEO_TITLE),
+                facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_ADVISORY_RATING));
+
         // Populate a label with the attributes of a given digitalEntity.
-        label.setExperienceDescriptor(getConcertInfo());
+        label.setExperienceDescriptor("Advisory rating: " + facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_ADVISORY_RATING));
 
         return label;
     }
@@ -41,13 +49,22 @@ public class ExempliDigitalEntityUI extends DigitalEntityUI {
     @Override
     public void onClick() {
         // Create the text to send to the Activity.
-        String concertInfo = getConcertInfo();
+        Facet facet = getVideoInfo();
+
+        String concertInfo = getContext().getString(R.string.concert_label,
+                facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_VIDEO_TITLE),
+                facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_ADVISORY_RATING));
+
+        // Call the mocked external service.
+        ExempliClient exClient = new ExempliClient();
+        ArrayList<String> guides = exClient.getImdbData(facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_ASIN));
 
         // Create an intent to send the concert info to the ExempliActivity.
         Intent sendConcert = new Intent(getContext(), ExempliActivity.class);
         // Ensure that this activity is marked as new, bringing it to focus.
         sendConcert.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         sendConcert.putExtra(Intent.EXTRA_TEXT, concertInfo);
+        sendConcert.putExtra("guides", guides);
 
         // Start the ExempliActivity.
         getContext().startActivity(sendConcert);
@@ -59,12 +76,8 @@ public class ExempliDigitalEntityUI extends DigitalEntityUI {
      *
      * These attributes are set in the ExempliResolver.
      */
-    private String getConcertInfo() {
+    private Facet getVideoInfo() {
         Facet facet = getDigitalEntity().getFacet(FacetType.MY_FACET);
-        String concertInfo = getContext().getString(R.string.concert_label,
-                facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_VIDEO_TITLE),
-                facet.getAttribute(ExempliPlugin.EXEMPLI_FACET_ATTRIBUTE_ADVISORY_RATING));
-
-        return concertInfo;
+        return facet;
     }
 }

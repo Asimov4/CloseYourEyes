@@ -7,6 +7,10 @@
 //
 apply plugin: 'com.android.application'
 
+dependencies {
+    compile files('libs/jsoup-1.8.1.jar')
+}
+
 android {
     compileSdkVersion "Amazon.com:Amazon Fire Phone SDK Addon:17"
 
